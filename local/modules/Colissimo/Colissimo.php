@@ -35,7 +35,11 @@ class Colissimo extends AbstractDeliveryModule
     public static function getPrices()
     {
         if (null === self::$prices) {
-            self::$prices = json_decode(Colissimo::getConfigValue(ColissimoConfigValue::PRICES, null), true);
+            $pricesConfig = Colissimo::getConfigValue(ColissimoConfigValue::PRICES, null);
+            if (null === $pricesConfig) {
+                $pricesConfig = self::loadDefaultPrices();
+            }
+            self::$prices = json_decode($pricesConfig, true);
         }
 
         return self::$prices;
@@ -158,7 +162,7 @@ class Colissimo extends AbstractDeliveryModule
 
     public function update($currentVersion, $newVersion, ConnectionInterface $con = null)
     {
-        $uploadDir = __DIR__ . '/Config/prices.json';
+        $uploadDir = __DIR__ . self::JSON_PRICE_RESOURCE;
 
         $database = new Database($con);
 
@@ -173,5 +177,24 @@ class Colissimo extends AbstractDeliveryModule
         if (is_readable($uploadDir) && Colissimo::getConfigValue(ColissimoConfigValue::PRICES, null) == null) {
             Colissimo::setConfigValue(ColissimoConfigValue::PRICES, file_get_contents($uploadDir));
         }
+    }
+
+    public static function loadDefaultPrices()
+    {
+        $pricesFilePath  = __DIR__ . self::JSON_PRICE_RESOURCE;
+
+        if (!is_readable($pricesFilePath)) {
+            throw new \Exception(
+                sprintf(
+                    "Impossible to load default prices of Colissimo modules. File [%] is not readable.",
+                    $pricesFilePath
+                )
+            );
+        }
+
+        $pricesContent = file_get_contents($pricesFilePath);
+        Colissimo::setConfigValue(ColissimoConfigValue::PRICES, $pricesContent);
+
+        return $pricesContent;
     }
 }
