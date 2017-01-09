@@ -6,7 +6,6 @@
 
     <loops>
         <loop class="Colissimo\Loop\Price" name="colissimo"/>
-        <loop class="Colissimo\Loop\CheckRightsLoop" name="colissimo.check.rights" />
         <loop class="Colissimo\Loop\NotSendLoop" name="colissimo.notsend.loop" />
     </loops>
 
