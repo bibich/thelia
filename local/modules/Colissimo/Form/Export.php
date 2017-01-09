@@ -14,6 +14,7 @@ namespace Colissimo\Form;
 
 use Colissimo\Colissimo;
 use Colissimo\Model\ColissimoQuery;
+use Colissimo\Model\Config\ColissimoConfigValue;
 use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -27,6 +28,9 @@ use Thelia\Form\BaseForm;
  */
 class Export extends BaseForm
 {
+
+    /** @var Translator */
+    protected $translator;
 
     /**
      *
@@ -64,11 +68,7 @@ class Export extends BaseForm
                             array("methods" => array(array($this, "verifyValue")))
                         )
                     ],
-                    'label' => Translator::getInstance()->trans(
-                        'Modify status export after export',
-                        [],
-                        Colissimo::DOMAIN_NAME
-                    ),
+                    'label' => $this->trans('Modify status export after export'),
                     'label_attr' => [
                         'for' => 'status_id'
                     ]
@@ -87,6 +87,13 @@ class Export extends BaseForm
                             'for'=>'export_'.$order->getId()
                         )
                     )
+                )
+                ->add(
+                    "order_product_code_".$order->getId(),
+                    'choice',
+                    [
+                        'choices' => ColissimoConfigValue::getProducts()
+                    ]
                 )
                 ->add(
                     "order_nb_pkg_".$order->getId(),
@@ -118,5 +125,13 @@ class Export extends BaseForm
     public function getName()
     {
         return "colissimo_export";
+    }
+
+    protected function trans($id, $parameters = [], $locale = null)
+    {
+        if (null === $this->translator) {
+            $this->translator = Translator::getInstance();
+        }
+        return $this->translator->trans($id, $parameters, Colissimo::DOMAIN_NAME, $locale);
     }
 }

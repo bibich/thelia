@@ -1,14 +1,3 @@
-<div class="row">
-    <!-- Errors -->
-    {loop name="checkrights.colissimo" type="colissimo.check.rights"}
-    <div class="alert alert-danger">
-        <p>{$ERRMES} {$ERRFILE} | {intl d='colissimo.bo.default' l="Please change the access rights"}.</p>
-    </div>
-    {/loop}
-</div>
-
-{elseloop rel="checkrights.colissimo"}
-
 <div class="alert alert-info">
     <p>{intl d='colissimo.bo.default' l="Colissimo Module allows to send your products all around the world with La Poste."}</p>
 </div>
@@ -50,6 +39,14 @@
                     {/if}
                 </div>
                 {/form_field}
+
+                {render_form_field form=$form field="export_type"}
+
+                {render_form_field form=$form field="account_number"}
+
+                {render_form_field form=$form field="sender_code"}
+
+                {render_form_field form=$form field="default_product"}
 
                 <button type="submit" name="colissimo_save_configuration" value="save" class="form-submit-button btn btn-sm btn-default" title="{intl d='colissimo.bo.default' l='Save'}">
                     {intl d='colissimo.bo.default' l='Save'}
@@ -133,6 +130,9 @@
                                         {intl d='colissimo.ai' l="Total taxed amount"}
                                     </th>
                                     <th class="object-title">
+                                      {intl d='colissimo.ai' l="Product code"}
+                                    </th>
+                                    <th class="object-title">
                                         {intl d='colissimo.ai' l="Number of packages"}
                                     </th>
                                     <th class="object-title">
@@ -142,6 +142,11 @@
                                         {intl d='colissimo.ai' l="Export"}
                                     </th>
                                 </thead>
+
+                                {$default_product=''}
+                                {loop name="module-config" type="module-config" module="Colissimo" variable="default_product"}
+                                    {$default_product=$VALUE}
+                                {/loop}
 
                                 <tbody>
                                     {loop name="colissimo.notsend.loop" type="colissimo.notsend.loop"}
@@ -161,6 +166,15 @@
                                                 {$TOTAL_TAXED_AMOUNT} {loop name="list.socolissimo.getcurrency" type="currency" id=$CURRENCY}{$SYMBOL}{/loop}
                                             </td>
                                             <td>
+                                              {form_field form=$form field="order_product_code_"|cat:$ID}
+                                                  <select class="form-control" name="{$name}">
+                                                      {foreach $choices as $choice}
+                                                          <option value="{$choice->value}" {if $choice->value == $default_product}selected="selected"{/if}>{$choice->label}</option>
+                                                      {/foreach}
+                                                  </select>
+                                              {/form_field}
+                                            </td>
+                                            <td>
                                                 {form_field form=$form field="order_nb_pkg_"|cat:$ID}
                                                     <input class="form-control text-center" type="text" name="{$name}" value="1" />
                                                 {/form_field}
@@ -172,7 +186,7 @@
                                             </td>
                                             <td>
                                                 {form_field field="order_"|cat:$ID}
-                                                    <input type="checkbox" name="{$name}" id="{$label_attr.for}" value="true" class="form-control"/>
+                                                    <input type="checkbox" name="{$name}" id="{$label_attr.for}" value="true" class="form-control" />
                                                 {/form_field}
                                             </td>
                                         </tr>
@@ -313,4 +327,3 @@
         </div>
     </div>
 </div>
-{/elseloop}

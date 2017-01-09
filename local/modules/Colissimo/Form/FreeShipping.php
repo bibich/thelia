@@ -13,7 +13,7 @@
 namespace Colissimo\Form;
 
 use Colissimo\Colissimo;
-use Colissimo\Model\Config\Base\ColissimoConfigValue;
+use Colissimo\Model\Config\ColissimoConfigValue;
 use Thelia\Core\Translation\Translator;
 use Thelia\Form\BaseForm;
 

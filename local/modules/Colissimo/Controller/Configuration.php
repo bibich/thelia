@@ -49,6 +49,10 @@ class Configuration extends BaseAdminController
                 ColissimoConfigValue::ENABLED,
                 is_bool($data["enabled"]) ? (int) ($data["enabled"]) : $data["enabled"]
             );
+            Colissimo::setConfigValue(ColissimoConfigValue::EXPORT_TYPE, (string)($data["export_type"]));
+            Colissimo::setConfigValue(ColissimoConfigValue::ACCOUNT_NUMBER, (string)($data["account_number"]));
+            Colissimo::setConfigValue(ColissimoConfigValue::SENDER_CODE, (string)($data["sender_code"]));
+            Colissimo::setConfigValue(ColissimoConfigValue::DEFAULT_PRODUCT, (string)($data["default_product"]));
 
             return $this->redirectToConfigurationPage();
 
@@ -62,7 +66,14 @@ class Configuration extends BaseAdminController
                 $error_message,
                 $form
             );
-            $response = $this->render("module-configure", ['module_code' => 'Colissimo']);
+            $response = $this->render(
+                "module-configure",
+                [
+                    'module_code' => 'Colissimo',
+                    'products' => ColissimoConfigValue::getProducts(),
+                    'default_product' => Colissimo::getConfigValue(ColissimoConfigValue::DEFAULT_PRODUCT),
+                ]
+            );
         }
         return $response;
     }
