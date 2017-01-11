@@ -38,10 +38,10 @@ class ColissimoConfigValue
         $t = Translator::getInstance();
 
         $products = [
-            'DOM' => $t->trans('Colissimo Domicile - sans signature', [], Colissimo::DOMAIN_NAME),
-            'DOS' => $t->trans('Colissimo Domicile - avec signature', [], Colissimo::DOMAIN_NAME),
-            'COM' => $t->trans('Colissimo Domicile Outre-Mer - sans signature', [], Colissimo::DOMAIN_NAME),
-            'CDS' => $t->trans('Colissimo Domicile Outre-Mer - avec signature', [], Colissimo::DOMAIN_NAME),
+            'DOM' => $t->trans('Colissimo Domicile - without signature', [], Colissimo::DOMAIN_NAME),
+            'DOS' => $t->trans('Colissimo Domicile - with signature', [], Colissimo::DOMAIN_NAME),
+            'COM' => $t->trans('Colissimo Domicile Outre-Mer - without signature', [], Colissimo::DOMAIN_NAME),
+            'CDS' => $t->trans('Colissimo Domicile Outre-Mer - with signature', [], Colissimo::DOMAIN_NAME),
             'ECO' => $t->trans('Colissimo Eco Outre-Mer', [], Colissimo::DOMAIN_NAME),
             'COLI' => $t->trans('International Colissimo Expert (outside Europe)', [], Colissimo::DOMAIN_NAME),
         ];

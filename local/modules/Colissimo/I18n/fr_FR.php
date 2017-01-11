@@ -1,14 +1,27 @@
 <?php
 
-return [
+return array(
     'Activate free shipping: ' => 'Activer la livraison offerte: ',
-    'Can\'t read Config directory' => 'Le dossier Config ne peut être lu',
-    'Can\'t read file' => 'Le fichier suivant ne peut être lu',
-    'Can\'t write Config directory' => 'Le dossier Config ne peut être écrit',
-    'Can\'t write file' => 'Le fichier suivant ne peut être écrit',
+    'Billing account number' => 'Numéro de compte client',
+    'Check if you want to activate Colissimo' => 'Cochez si vous voulez activer Colissimo',
+    'Coliship' => 'Coliship',
+    'Colissimo Domicile - with signature' => 'Colissimo Domicile - ave signature',
+    'Colissimo Domicile - without signature' => 'Colissimo Domicile - sans signature',
+    'Colissimo Domicile Outre-Mer - with signature' => 'Colissimo Domicile Outre-Mer - avec signature',
+    'Colissimo Domicile Outre-Mer - without signature' => 'Colissimo Domicile Outre-Mer - sans signature',
+    'Colissimo Eco Outre-Mer' => 'Colissimo Eco Outre-Mer',
     'Colissimo delivery unavailable for the delivery country' => 'La livraison par Colissimo n\'est pas disponible dans ce pays',
     'Colissimo delivery unavailable for this cart weight (%weight kg)' => 'La livraison par Colissimo n\'est pas disponible pour un panier de %weight Kg',
+    'Default product' => 'Produit par défaut',
+    'Expeditor' => 'Expeditor',
+    'Export type' => 'Type d\'export',
+    'For Coliship export, you should provide an account number and a sender code' => 'Pour un export Coliship, vous devez renseigner le numéro de compte et le code expéditeur',
+    'International Colissimo Expert (outside Europe)' => 'International Colissimo Expert (hors Europe)',
     'Modify status export after export' => 'Modification du statut des commandes après l\'export',
-    'colissimo expeditor export' => 'Export pour le logiciel Expeditor',
+    'Sender address code in Coliship address book' => 'code de l\'adresse expéditeur dans votre carnet d\'adresse Coliship.',
+    'Sender code' => 'Code expéditeur',
+    'The default Colissimo product to use' => 'Le produits par défaut à utiliser pour l\'export',
+    'You must fill in your account number and sender code before' => 'Vous devez renseigner votre numéro de client et le code expéditeur',
+    'colissimo export' => 'Export Colissimo',
     'select a valid status' => 'Choisissez un statut de commande valide.',
-];
+);
